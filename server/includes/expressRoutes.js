@@ -75,9 +75,9 @@ routes.post('/login', asyncHandler(async(req, res) => {
                 body: JSON.stringify(data)
             });
             let status = await response.json();
-            if(status.enabled == false){
-                res.redirect('/login?e=authError');
-            }
+            // if(status.enabled == false){
+            //     res.redirect('/login?e=authError');
+            // }
                 db.maindb.get('admin').assign({ loginToken }).write();
                 res.cookie('loginToken', loginToken).redirect('/panel');
             } else return res.redirect('/login?e=badLogin');

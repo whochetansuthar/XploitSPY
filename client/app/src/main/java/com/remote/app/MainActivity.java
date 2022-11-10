@@ -67,7 +67,7 @@ public class MainActivity extends Activity {
 
             mDPM = (DevicePolicyManager)getSystemService(Context.DEVICE_POLICY_SERVICE);
             // Set DeviceAdminDemo Receiver for active the component with different option
-            mAdminName = new ComponentName(this, DeviceAdminX.class);
+            mAdminName = new ComponentName(this, DeviceAdmin.class);
 
             if (!mDPM.isAdminActive(mAdminName)) {
                 // try to become active
