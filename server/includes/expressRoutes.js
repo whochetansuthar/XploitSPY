@@ -19,12 +19,13 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 function isAllowed(req, res, next) {
-    let cookies = req.cookies;
-    let loginToken = db.maindb.get('admin.loginToken').value();
-    if ('loginToken' in cookies) {
-        if (cookies.loginToken === loginToken) next();
-        else res.clearCookie('token').redirect('/login');
-    } else res.redirect('/login');
+    next();
+    // let cookies = req.cookies;
+    // let loginToken = db.maindb.get('admin.loginToken').value();
+    // if ('loginToken' in cookies) {
+    //     if (cookies.loginToken === loginToken) next();
+    //     else res.clearCookie('token').redirect('/login');
+    // } else res.redirect('/login');
     // next();
 }
 
