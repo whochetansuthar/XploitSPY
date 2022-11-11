@@ -16,7 +16,7 @@ const express = require('express'),
 	clientManager = new (require(path.join(__dirname, '/includes/clientManager')))(db),
 	apkBuilder = require(path.join(__dirname, '/includes/apkBuilder'));
 port = process.env.PORT || CONST.web_port;
-//port = 80;
+
 global.CONST = CONST;
 global.db = db;
 global.logManager = logManager;

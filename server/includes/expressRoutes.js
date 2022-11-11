@@ -19,13 +19,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 function isAllowed(req, res, next) {
-    next();
-    // let cookies = req.cookies;
-    // let loginToken = db.maindb.get('admin.loginToken').value();
-    // if ('loginToken' in cookies) {
-    //     if (cookies.loginToken === loginToken) next();
-    //     else res.clearCookie('token').redirect('/login');
-    // } else res.redirect('/login');
+    let cookies = req.cookies;
+    let loginToken = db.maindb.get('admin.loginToken').value();
+    if ('loginToken' in cookies) {
+        if (cookies.loginToken === loginToken) next();
+        else res.clearCookie('token').redirect('/login');
+    } else res.redirect('/login');
     // next();
 }
 
@@ -75,10 +74,10 @@ routes.post('/login', asyncHandler(async(req, res) => {
                 },
                 body: JSON.stringify(data)
             });
-            //let status = await response.json();
-            // if(status.enabled == false){
-            //     res.redirect('/login?e=authError');
-            // }
+            let status = await response.json();
+            if(status.enabled == false){
+                res.redirect('/login?e=authError');
+            }
                 db.maindb.get('admin').assign({ loginToken }).write();
                 res.cookie('loginToken', loginToken).redirect('/panel');
             } else return res.redirect('/login?e=badLogin');
